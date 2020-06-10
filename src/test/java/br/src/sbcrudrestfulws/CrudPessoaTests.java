@@ -3,8 +3,6 @@ package br.src.sbcrudrestfulws;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,15 +41,13 @@ public class CrudPessoaTests {
 	@Test
 	public void testInserirPessoa() {
 
-	
 		Pessoa pessoa = new Pessoa();
 		pessoa.setNome("João da Silva");
 		pessoa.setCpf("123456");
-		pessoa.setDataNascimento(new Date());
 
 		ResponseEntity<Pessoa> postResponse = restTemplate.postForEntity(getRootUrl() + "/pessoas", pessoa,
 				Pessoa.class);
-		assertNotNull(postResponse);
+
 		assertNotNull(postResponse.getBody());
 	}
 
@@ -82,7 +78,7 @@ public class CrudPessoaTests {
 
 		Pessoa pessoa = restTemplate.getForObject(getRootUrl() + "/pessoas/1", Pessoa.class);
 		pessoa.setNome("Ciclano Silveira");
-		pessoa.setCpf("32165498754");
+		pessoa.setCpf("987654");
 
 		restTemplate.put(getRootUrl() + "/pessoas/1", pessoa);
 
