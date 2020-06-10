@@ -36,13 +36,10 @@ public class CrudPessoaTests {
 		return "http://localhost:" + port + "/api/v1";
 	}
 
-	@Test
-	public void contextLoads() {
-
-	}
-
-	@Test
-	public void test1InserirPessoa() {
+	
+	//Inserir pessoa
+	@Test	
+	public void test1() {
 
 		Pessoa pessoa = new Pessoa();
 		pessoa.setNome("João da Silva");
@@ -53,9 +50,10 @@ public class CrudPessoaTests {
 
 		assertNotNull(postResponse.getBody());
 	}
-
+	
+	//Recuperar pessoas
 	@Test
-	public void test2RecuperarPessoas() {
+	public void test2() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
@@ -64,9 +62,10 @@ public class CrudPessoaTests {
 
 		assertEquals(200, response.getStatusCodeValue());
 	}
-
+	
+	//Recuperar pessoa por Id
 	@Test
-	public void test3RecuperarPessoaPorId() {
+	public void test3() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
@@ -75,9 +74,10 @@ public class CrudPessoaTests {
 
 		assertEquals(200, response.getStatusCodeValue());
 	}
-
+	
+	//Atualizar pessoa
 	@Test
-	public void test4AtualizarPessoa() {
+	public void test4() {
 
 		Pessoa pessoa = restTemplate.getForObject(getRootUrl() + "/pessoas/1", Pessoa.class);
 		pessoa.setNome("Ciclano Silveira");
@@ -88,9 +88,10 @@ public class CrudPessoaTests {
 		Pessoa pessoaNew = restTemplate.getForObject(getRootUrl() + "/pessoas/1", Pessoa.class);
 		assertNotNull(pessoaNew);
 	}
-
+	
+	//Exluir pessoa
 	@Test
-	public void test5ExcluirPessoa() {
+	public void test5() {
 
 		Pessoa pessoa = restTemplate.getForObject(getRootUrl() + "/pessoas/1", Pessoa.class);
 		assertNotNull(pessoa);
