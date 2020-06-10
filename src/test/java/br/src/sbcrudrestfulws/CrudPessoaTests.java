@@ -3,8 +3,10 @@ package br.src.sbcrudrestfulws;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -21,6 +23,7 @@ import br.src.sbcrudrestfulws.model.Pessoa;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SbCrudRestfulWsApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CrudPessoaTests {
 
 	@Autowired
@@ -39,7 +42,7 @@ public class CrudPessoaTests {
 	}
 
 	@Test
-	public void testInserirPessoa() {
+	public void test1InserirPessoa() {
 
 		Pessoa pessoa = new Pessoa();
 		pessoa.setNome("João da Silva");
@@ -52,7 +55,7 @@ public class CrudPessoaTests {
 	}
 
 	@Test
-	public void testRecuperarPessoas() {
+	public void test2RecuperarPessoas() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
@@ -63,18 +66,18 @@ public class CrudPessoaTests {
 	}
 
 	@Test
-	public void testRecuperarPessoaPorId() {
+	public void test3RecuperarPessoaPorId() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
 		ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/pessoas/1", HttpMethod.GET, entity,
 				String.class);
 
-		assertEquals(404, response.getStatusCodeValue());
+		assertEquals(200, response.getStatusCodeValue());
 	}
 
 	@Test
-	public void testAtualizarPessoa() {
+	public void test4AtualizarPessoa() {
 
 		Pessoa pessoa = restTemplate.getForObject(getRootUrl() + "/pessoas/1", Pessoa.class);
 		pessoa.setNome("Ciclano Silveira");
@@ -87,7 +90,7 @@ public class CrudPessoaTests {
 	}
 
 	@Test
-	public void testExcluirPessoa() {
+	public void test5ExcluirPessoa() {
 
 		Pessoa pessoa = restTemplate.getForObject(getRootUrl() + "/pessoas/1", Pessoa.class);
 		assertNotNull(pessoa);
